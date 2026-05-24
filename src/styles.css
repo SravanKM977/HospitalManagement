@@ -1,4 +1,5 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 html,
 body {
@@ -23,4 +24,133 @@ img {
   cursor: pointer;
   gap: 10px;
   margin-right: 10px;
+}
+
+.input-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns of equal width */
+  gap: 16px; /* Space between fields */
+}
+
+.input-container .mb-3 {
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.page-title-container {
+  padding: 0.5rem 0;
+  border-bottom: 2px solid #e9ecef;
+  /* margin-bottom: 1.5rem; */
+}
+
+.page-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+button[type='submit'] {
+  display: block;
+  padding: 4px 16px; /* Adjusts the size of the button */
+  font-size: 1em; /* Sets a readable font size */
+  background-color: lightseagreen; /* Bootstrap primary color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type='submit']:hover,
+:focus-visible {
+  background-color: gold; /* Darker shade for hover effect */
+  color: black; /* Change text color on hover */
+}
+
+button[type='button']:disabled {
+  background-color: #cccccc; /* Gray color for disabled state */
+  cursor: not-allowed;
+}
+
+button[type='reset'] {
+  display: block;
+  margin: 20px auto 0; /* Centers the button horizontally */
+  padding: 4px 16px; /* Adjusts the size of the button */
+  font-size: 1em; /* Sets a readable font size */
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex; /* Use Flexbox to align buttons in a row */
+  gap: 10px; /* Add space between the buttons */
+  justify-content: center; /* Center the buttons horizontally */
+}
+
+.button-container .btn {
+  padding: 8px 16px; /* Adjust button padding */
+  font-size: 1rem; /* Set a consistent font size */
+}
+
+.btn {
+  min-width: 120px;
+}
+
+.cancel-link {
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 4px 16px;
+  align-content: center;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.form-row {
+  display: flex; /* Use Flexbox to align items in a row */
+  gap: 30px; /* Add 30px gap between dropdowns */
+  align-items: flex-start; /* Align items at the top */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column; /* Stack label and dropdown vertically */
+}
+
+/* .table {
+  margin-top: 20px;
+} */
+
+.no-records {
+  margin: 10px auto;
+  padding: 10px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  background-color: none;
+  color: black;
 }
