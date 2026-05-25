@@ -5,8 +5,6 @@ export interface Doctor {
   name: string;
   specialization: string;
   experience: number;
-
   departmentId: number;
-
   department?: Department;
 }
