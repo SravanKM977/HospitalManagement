@@ -1,1 +1,99 @@
-<p>doctors works!</p>
+<app-page-title [childTitle]="pageTitle"></app-page-title>
+
+<form [formGroup]="doctorForm" (ngSubmit)="Submit()">
+  <div class="input-container">
+    <div class="mb-3">
+      <label for="name" class="from-label">Name</label>
+      <input type="text" name="name" title="name" class="form-control" formControlName="name">
+    </div>
+
+    <div class="mb-3">
+      <label for="specialization" class="from-label">Specialization</label>
+      <input type="text" name="specialization" title="specialization" class="form-control"
+        formControlName="specialization">
+    </div>
+
+    <div class="mb-3">
+      <label for="experience" class="from-label">Experience</label>
+      <input type="number" name="experience" title="experience" class="form-control" formControlName="experience">
+    </div>
+
+    @let departments = (departments$ | async);
+
+    <div class="mb-3">
+      <label for="departmentId" class="from-label">Department</label>
+      <select type="dropdown" class="form-select" formControlName="departmentId" name="departmentId"
+        title="departmentId">
+        <option value="" disabled selected>Select Department</option>
+        @for(department of departments; track department.id) {
+        <option [value]="department.id">
+          {{department.name}}
+        </option>
+        }
+      </select>
+    </div>
+  </div>
+
+  @if(mode === 'add') {
+  <div class="button-wrapper">
+    <button type="submit" class="btn btn-primary">
+      Add
+    </button>
+  </div>
+  } @else if(mode === 'edit') {
+  <div class="button-wrapper">
+    <div class="button-container">
+      <a class="cancel-link" (click)="onCancel()">
+        Cancel
+      </a>
+
+      <button type="submit" class="btn btn-primary">
+        Update
+      </button>
+    </div>
+  </div>
+  }
+</form>
+
+<app-page-table-title [childTableTitle]="pageTableTitle"></app-page-table-title>
+
+
+@let doctors = (doctors$ | async);
+
+@if(doctors?.length && departments?.length) {
+<table class="table table-hover table-success table-bordered">
+  <thead class="table-light">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Specialization</th>
+      <th scope="col">Experience</th>
+      <th scope="col">Department</th>
+      @if(mode === 'add') {
+      <th scope="col">Action</th>
+      }
+    </tr>
+  <tbody class="table-group-divider">
+    @for(doctor of doctors; track doctor.id) {
+    <tr>
+      <!-- <th scope="row">{{patient.id}}</th> -->
+      <td scope="row">{{ doctor.name }}</td>
+      <td scope="row">{{ doctor.specialization }}</td>
+      <td scope="row">{{ doctor.experience }}</td>
+      <td scope="row">{{doctor.department?.name}}</td>
+      @if(mode === 'add') {
+      <td scope="row">
+        <img src="assets/images/pencil.png" alt="" (click)="onEdit(doctor)" />
+        <img src="assets/images/delete.png" alt="" (click)="onDelete(doctor)" />
+      </td>
+      }
+    </tr>
+    }
+  </tbody>
+</table>
+} @else if (!(doctors?.length)) {
+<div class="no-records">
+  <h3>
+    No {{pageTitle}}
+  </h3>
+</div>
+}

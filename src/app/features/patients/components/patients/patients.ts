@@ -1,5 +1,5 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PatientService } from '../../services/patient.service';
 import { map, Observable } from 'rxjs';
 import { Patient } from '../../models/patients.interface';
@@ -12,6 +12,8 @@ import { AlphabetsOnlyDirective } from '../../../../shared/directives/alphabets-
 import { Gender } from '../../../../shared/models/gender.interface';
 import { BloodGroup } from '../../../../shared/models/bloodGroup.interface';
 import { AllPhoneFormatsPipe } from '../../../../shared/pipes/all-phone-formats-pipe';
+import { PageTitle } from '../../../../shared/components/page-title/page-title';
+import { PageTableTitle } from '../../../../shared/components/page-table-title/page-table-title';
 
 @Component({
   selector: 'app-patients',
@@ -25,16 +27,17 @@ import { AllPhoneFormatsPipe } from '../../../../shared/pipes/all-phone-formats-
     NoAlphabetsDirective,
     AlphabetsOnlyDirective,
     AllPhoneFormatsPipe,
+    PageTitle,
+    PageTableTitle,
   ],
   providers: [PatientService],
   templateUrl: './patients.html',
   styleUrl: './patients.css',
 })
 export class Patients {
-  pageTitle = 'Patients';
+  pageTitle: string = 'Patients';
   pageTableTitle = 'Patients List';
   patients$!: Observable<Patient[]>;
-  patientName = '';
 
   patientForm!: FormGroup;
   mode = 'add';
