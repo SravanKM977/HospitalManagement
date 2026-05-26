@@ -3,25 +3,25 @@
 <form [formGroup]="doctorForm" (ngSubmit)="Submit()">
   <div class="input-container">
     <div class="mb-3">
-      <label for="name" class="from-label">Name</label>
+      <label for="name" class="form-label">Name</label>
       <input type="text" name="name" title="name" class="form-control" formControlName="name">
     </div>
 
     <div class="mb-3">
-      <label for="specialization" class="from-label">Specialization</label>
+      <label for="specialization" class="form-label">Specialization</label>
       <input type="text" name="specialization" title="specialization" class="form-control"
         formControlName="specialization">
     </div>
 
     <div class="mb-3">
-      <label for="experience" class="from-label">Experience</label>
+      <label for="experience" class="form-label">Experience</label>
       <input type="number" name="experience" title="experience" class="form-control" formControlName="experience">
     </div>
 
     @let departments = (departments$ | async);
 
     <div class="mb-3">
-      <label for="departmentId" class="from-label">Department</label>
+      <label for="departmentId" class="form-label">Department</label>
       <select type="dropdown" class="form-select" formControlName="departmentId" name="departmentId"
         title="departmentId">
         <option value="" disabled selected>Select Department</option>
