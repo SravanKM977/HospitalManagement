@@ -70,20 +70,11 @@ export class Doctors {
       map((doctors) =>
         doctors.map((doctor) => ({
           ...doctor,
-          department: this.departments.find((d) => d.id === Number(doctor.departmentId)),
+          department: this.departments.find((d) => d.id == doctor.departmentId),
         }))
       )
     );
   }
-
-  // getDepartmentName(departmentId: number | string): string {
-  //   const department = this.departments.find(
-  //     (department) => department.id === Number(departmentId)
-  //   );
-  //   console.log(department);
-
-  //   return department ? department.name : '';
-  // }
 
   onEdit(doctor: Doctor) {
     this.mode = 'edit';

@@ -103,14 +103,27 @@
   ],
   "doctors": [
     {
-      "id": "fCpIPYl1l5Y",
+      "id": "1",
       "name": "Sravan",
       "specialization": "ded",
       "experience": 2,
       "departmentId": "3"
     }
   ],
-  "appointments": [],
+  "appointments": [
+    {
+      "id": 1,
+      "patientId": 1,
+      "doctorId": 1,
+      "appointmentDate": "2026-05-25"
+    },
+    {
+      "id": 2,
+      "patientId": 2,
+      "doctorId": 2,
+      "appointmentDate": "2026-05-26"
+    }
+  ],
   "departments": [
     {
       "id": "1",
