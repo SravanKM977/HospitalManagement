@@ -1,25 +1,80 @@
-<!-- <app-page-title [childTitle]="pageTitle"></app-page-title>
+<app-page-title [childTitle]="pageTitle"></app-page-title>
 
 <form [formGroup]="appointmentForm" (ngSubmit)="submit()">
   <div class="input-container">
+
+    @let patients = (patients$ | async);
     <div class="mb-3">
-      <label for="" class="from-label"></label>
-      <input type="text" name="" title="" class="form-control" formControlName="">
+      <label for="patientId" class="form-label">Patient Id</label>
+      <select type="text" name="patientId" title="patientId" class="form-select" formControlName="patientId">
+        <option [ngValue]="null" disabled selected>
+          Select Patient
+        </option>
+        @for(patient of patients; track patient.id) {
+        <option [ngValue]="patient.id">{{patient.fullName}}</option>
+        }
+      </select>
     </div>
+
+    @let doctors = (doctors$ | async);
     <div class="mb-3">
-      <label for="" class="from-label"></label>
-      <input type="text" name="" title="" class="form-control" formControlName="">
+      <label for="doctorId" class="form-label"> Doctor Id</label>
+      <select type="select" name="doctorId" title="doctorId" class="form-select" formControlName="doctorId">
+        <option [ngValue]="null" disabled selected>
+          Select Doctor
+        </option>
+        @for(doctor of doctors; track doctor.id) {
+        <option [ngValue]="doctor.id">{{doctor.name}}</option>
+        }
+      </select>
     </div>
+
     <div class="mb-3">
-      <label for="" class="from-label"></label>
-      <input type="text" name="" title="" class="form-control" formControlName="">
+      <label for="appointmentDate" class="form-label">Appointment Date</label>
+      <input type="text" name="appointmentDate" title="appointmentDate" class="form-control"
+        formControlName="appointmentDate">
     </div>
+
     <div class="mb-3">
-      <label for="" class="from-label"></label>
-      <input type="text" name="" title="" class="form-control" formControlName="">
+      <label for="status" class="form-label">Status</label>
+      <select class="form-select" formControlName="status" name="status" title="status">
+        <option [ngValue]="null" disabled>
+          Select Status
+        </option>
+        @for(status of statuses; track status) {
+        <option [ngValue]="status">{{status}}</option>
+        }
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="reason" class="form-label">Reason</label>
+      <textarea type="text" name="reason" title="reason" class="form-control" formControlName="reason"></textarea>
     </div>
   </div>
-</form> -->
+
+  @if(mode === 'add') {
+  <div class="button-wrapper">
+    <button type="submit" class="btn btn-primary">
+      Add
+    </button>
+  </div>
+  } @else if(mode === 'edit') {
+  <div class="button-wrapper">
+    <div class="button-container">
+      <a class="cancel-link" (click)="onCancel()">
+        Cancel
+      </a>
+
+      <button type="submit" class="btn btn-primary">
+        Update
+      </button>
+    </div>
+  </div>
+  }
+</form>
+
+<h3>{{errorMessage}}</h3>
 
 <app-page-table-title [childTableTitle]="pageTableTitle"></app-page-table-title>
 
@@ -30,6 +85,9 @@
       <th scope="col">Doctor</th>
       <th scope="col">Department</th>
       <th scope="col">Date</th>
+      @if(mode === 'add') {
+      <th scope="col">Action</th>
+      }
     </tr>
   </thead>
 
@@ -41,6 +99,12 @@
       <td scope="row">{{appointment.doctor?.name}}</td>
       <td scope="row">{{appointment.doctor?.department?.name}}</td>
       <td scope="row">{{appointment.appointmentDate}}</td>
+      @if(mode === 'add') {
+      <td scope="row">
+        <img src="assets/images/pencil.png" alt="" (click)="onEdit(appointment)" />
+        <img src="assets/images/delete.png" alt="" (click)="onDelete(appointment)" />
+      </td>
+      }
     </tr>
     }
   </tbody>

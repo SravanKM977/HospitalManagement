@@ -154,3 +154,7 @@ button[type='reset'] {
   background-color: none;
   color: black;
 }
+
+.form-select {
+  background-color: white !important;
+}
