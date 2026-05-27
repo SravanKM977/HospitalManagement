@@ -112,16 +112,32 @@
   ],
   "appointments": [
     {
-      "id": 1,
+      "id": "1",
       "patientId": 1,
       "doctorId": 1,
       "appointmentDate": "2026-05-25"
     },
     {
-      "id": 2,
+      "id": "2",
       "patientId": 2,
       "doctorId": 2,
       "appointmentDate": "2026-05-26"
+    },
+    {
+      "id": "BqQorLBaf7I",
+      "patientId": "2",
+      "doctorId": "1",
+      "appointmentDate": "2026-05-25",
+      "reason": "dfdfd",
+      "status": "Scheduled"
+    },
+    {
+      "id": "uBgpcPqAIq4",
+      "patientId": "1",
+      "doctorId": "1",
+      "appointmentDate": "2026-05-26",
+      "reason": "edede",
+      "status": "Cancelled"
     }
   ],
   "departments": [
