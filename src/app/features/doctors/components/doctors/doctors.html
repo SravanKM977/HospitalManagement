@@ -57,10 +57,11 @@
 
 <app-page-table-title [childTableTitle]="pageTableTitle"></app-page-table-title>
 
-
 @let doctors = (doctors$ | async);
+<app-data-table [data]="doctors || []" [columns]="doctorTableHeaderColumns" [bodyColumns]="doctorTableBodyColumns"
+  [pageTitle]="pageTitle" (edit)="onEdit($event)" (delete)="onDelete($event)" [mode]="mode"></app-data-table>
 
-@if(doctors?.length && departments?.length) {
+<!-- @if(doctors?.length && departments?.length) {
 <table class="table table-hover table-success table-bordered">
   <thead class="table-light">
     <tr>
@@ -75,7 +76,6 @@
   <tbody class="table-group-divider">
     @for(doctor of doctors; track doctor.id) {
     <tr>
-      <!-- <th scope="row">{{patient.id}}</th> -->
       <td scope="row">{{ doctor.name }}</td>
       <td scope="row">{{ doctor.specialization }}</td>
       <td scope="row">{{ doctor.experience }}</td>
@@ -96,4 +96,4 @@
     No {{pageTitle}}
   </h3>
 </div>
-}
+} -->

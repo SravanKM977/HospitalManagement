@@ -14,6 +14,7 @@ import { BloodGroup } from '../../../../shared/models/bloodGroup.interface';
 import { AllPhoneFormatsPipe } from '../../../../shared/pipes/all-phone-formats-pipe';
 import { PageTitle } from '../../../../shared/components/page-title/page-title';
 import { PageTableTitle } from '../../../../shared/components/page-table-title/page-table-title';
+import { DataTable } from '../../../../shared/components/data-table/data-table';
 
 @Component({
   selector: 'app-patients',
@@ -29,6 +30,7 @@ import { PageTableTitle } from '../../../../shared/components/page-table-title/p
     AllPhoneFormatsPipe,
     PageTitle,
     PageTableTitle,
+    DataTable,
   ],
   providers: [PatientService],
   templateUrl: './patients.html',
@@ -58,6 +60,8 @@ export class Patients {
     { value: 'O+', label: 'O+' },
     { value: 'O-', label: 'O-' },
   ];
+
+  patientTableColumns = ['name', 'age', 'gender', 'phone', 'bloodGroup'];
 
   constructor(private patientService: PatientService, private fb: FormBuilder) {}
 

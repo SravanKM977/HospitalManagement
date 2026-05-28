@@ -10,6 +10,7 @@ import { FormStyleDirective } from '../../../../shared/directives/form-style-dir
 import { FormInputFontDirective } from '../../../../shared/directives/form-input-font-directive';
 import { PageTitle } from '../../../../shared/components/page-title/page-title';
 import { PageTableTitle } from '../../../../shared/components/page-table-title/page-table-title';
+import { DataTable } from '../../../../shared/components/data-table/data-table';
 
 @Component({
   selector: 'app-doctors',
@@ -20,6 +21,7 @@ import { PageTableTitle } from '../../../../shared/components/page-table-title/p
     FormInputFontDirective,
     PageTitle,
     PageTableTitle,
+    DataTable,
   ],
   providers: [DoctorService, DepartmentService],
   templateUrl: './doctors.html',
@@ -34,6 +36,9 @@ export class Doctors {
   doctorForm!: FormGroup;
   departments$!: Observable<Department[]>;
   departments: Department[] = [];
+
+  doctorTableHeaderColumns = ['name', 'specialization', 'experience', 'department'];
+  doctorTableBodyColumns = ['name', 'specialization', 'experience', 'department'];
 
   constructor(
     private fb: FormBuilder,

@@ -22,6 +22,7 @@ export class AppointmentService {
   }
 
   deleteAppointments(appointment: Appointment) {
+    console.log(appointment);
     return this.http.delete(`${apiEndPoints.appointments}/${appointment.id}`);
   }
 }

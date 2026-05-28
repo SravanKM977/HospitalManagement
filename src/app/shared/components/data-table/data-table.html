@@ -1,0 +1,41 @@
+@if(data?.length) {
+<table class="table table-hover table-success table-bordered">
+  <thead class="table-light">
+    <tr>
+      @for(column of columns; track column) {
+      <th scope="col">{{column | titlecase}}</th>
+      }
+      @if(mode === 'add') {
+      <th scope="col">Action</th>
+      }
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    @for(item of data; track item) {
+    <tr>
+      @for(column of bodyColumns; track column) {
+      @if(column === "name") {
+      <td>{{item.fullName || item.name}}</td>
+      } @else if (column === "department") {
+      <td>{{item.department?.name}}</td>
+      } @else if (column !== "name") {
+      <td scope="row">{{ item[column] }}</td>
+      }
+      }
+      @if(mode === 'add') {
+      <td scope="row">
+        <img src="assets/images/pencil.png" alt="" (click)="onEdit(item)" />
+        <img src="assets/images/delete.png" alt="" (click)="onDelete(item)" />
+      </td>
+      }
+    </tr>
+    }
+  </tbody>
+</table>
+} @else if (!(data?.length)) {
+<div class="no-records">
+  <h3>
+    No {{pageTitle}}
+  </h3>
+</div>
+}
