@@ -94,11 +94,13 @@
 
 @let patients = (patients$ | async);
 
-@if(patients?.length) {
-<table class="table table-hover table-success table-bordered">
+<app-data-table [columns]="patientTableColumns" [data]="patients || []" [mode]="mode" [pageTitle]="pageTitle"
+  (edit)="onEdit($event)" (delete)="onDelete($event)"></app-data-table>
+
+<!-- @if(patients?.length) {
+<table class=" table table-hover table-success table-bordered">
   <thead class="table-light">
     <tr>
-      <!-- <th scope="col">Id</th> -->
       <th scope="col">Name</th>
       <th scope="col">Age</th>
       <th scope="col">Gender</th>
@@ -111,7 +113,6 @@
   <tbody class="table-group-divider">
     @for(patient of patients; track patient.id) {
     <tr>
-      <!-- <th scope="row">{{patient.id}}</th> -->
       <td scope="row">{{ patient.fullName }}</td>
       <td scope="row">{{ patient.age }}</td>
       <td scope="row">{{ patient.gender }}</td>
@@ -125,11 +126,11 @@
     </tr>
     }
   </tbody>
-</table>
-} @else if (!(patients?.length)) {
-<div class="no-records">
-  <h3>
-    No {{pageTitle}}
-  </h3>
-</div>
-}
+  </table>
+  } @else if (!(patients?.length)) {
+  <div class="no-records">
+    <h3>
+      No {{pageTitle}}
+    </h3>
+  </div>
+  } -->

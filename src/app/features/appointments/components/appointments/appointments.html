@@ -78,6 +78,7 @@
 
 <app-page-table-title [childTableTitle]="pageTableTitle"></app-page-table-title>
 
+@let appointments = (mappedAppointments$ | async);
 <table class="table table-hover table-success table-bordered">
   <thead class="table-light">
     <tr>
@@ -91,7 +92,6 @@
     </tr>
   </thead>
 
-  @let appointments = (mappedAppointments$ | async);
   <tbody class="table-group-divider">
     @for(appointment of appointments; track appointment.id ) {
     <tr>

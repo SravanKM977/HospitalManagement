@@ -124,7 +124,7 @@ export class Appointments {
 
   onDelete(appointment: Appointment) {
     if (appointment && confirm('Are you sure you want to delete?')) {
-      this.deleteAppointments();
+      this.deleteAppointments(appointment);
     } else {
       return;
     }
@@ -135,9 +135,9 @@ export class Appointments {
       this.appointmentForm.markAllAsTouched();
       return;
     } else if (this.appointmentForm.valid) {
-      if ((this.mode = 'add')) {
+      if (this.mode === 'add') {
         this.addAppointments();
-      } else if ((this.mode = 'edit')) {
+      } else if (this.mode === 'edit') {
         this.updateAppointments();
       }
     }
@@ -173,8 +173,8 @@ export class Appointments {
     );
   }
 
-  deleteAppointments() {
-    const deleteAppointment = this.appointmentForm.value;
+  deleteAppointments(appointment: Appointment) {
+    const deleteAppointment = appointment;
     console.log(deleteAppointment);
     this.appointmentService.deleteAppointments(deleteAppointment).subscribe(
       (response) => {
