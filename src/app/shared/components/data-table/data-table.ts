@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, output, Output } from '@angular/core';
+import { AllPhoneFormatsPipe } from '../../pipes/all-phone-formats-pipe';
 
 @Component({
   selector: 'app-data-table',
-  imports: [CommonModule],
+  imports: [CommonModule, AllPhoneFormatsPipe],
   templateUrl: './data-table.html',
   styleUrl: './data-table.css',
 })

@@ -13,11 +13,13 @@
   <tbody class="table-group-divider">
     @for(item of data; track item) {
     <tr>
-      @for(column of bodyColumns; track column) {
+      @for(column of (columns|| bodyColumns); track column) {
       @if(column === "name") {
       <td>{{item.fullName || item.name}}</td>
       } @else if (column === "department") {
       <td>{{item.department?.name}}</td>
+      } @else if (column === "phone") {
+      <td scope="row">{{ item[column] | allPhoneFormats}}</td>
       } @else if (column !== "name") {
       <td scope="row">{{ item[column] }}</td>
       }
