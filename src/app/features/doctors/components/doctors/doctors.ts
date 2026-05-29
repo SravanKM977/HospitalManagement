@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DoctorService } from '../../services/doctor-service';
 import { Doctor } from '../../models/doctors.interface';
-import { map, Observable } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 import { Department } from '../../../departments/models/departments.interface';
 import { DepartmentService } from '../../../departments/services/department-service';
 import { FormStyleDirective } from '../../../../shared/directives/form-style-directive';
@@ -62,8 +62,8 @@ export class Doctors {
   }
 
   loadDepartments() {
-    this.departments$ = this.departmentService.getDepartments();
-    this.departmentService.getDepartments().subscribe((departments) => {
+    this.departments$ = this.departmentService.getDepartments().pipe(shareReplay(1));
+    this.departments$.subscribe((departments) => {
       this.departments = departments;
       console.log(departments);
       this.loadDoctors();

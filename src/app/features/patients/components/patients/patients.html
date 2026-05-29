@@ -1,101 +1,106 @@
-<app-page-title [childTitle]="pageTitle"></app-page-title>
+<app-panel>
+  <app-page-title [childTitle]="pageTitle" header></app-page-title>
 
-<form [formGroup]="patientForm" (ngSubmit)="submit()">
-  <div class="input-container">
-    <div class="mb-3">
-      <label for="firstName" class="form-label">First Name</label>
-      <input type="text" title="firstName" class="form-control" id="firstName" formControlName="firstName"
-        appAlphabetsOnlyDirective />
-      @if(patientFirstName?.touched && patientFirstName?.invalid) {
-      @if(patientFirstName?.hasError('required')) {
-      <div class="error">First Name is required</div>
-      } }
-    </div>
-    <div class="mb-3">
-      <label for="lastName" class="form-label">Last Name</label>
-      <input type="text" title="lastName" class="form-control" id="lastName" formControlName="lastName"
-        appAlphabetsOnlyDirective />
-      @if(patientLastName?.touched && patientLastName?.invalid) {
-      @if(patientLastName?.hasError('required')) {
-      <div class="error">Last Name is required</div>
-      } }
-    </div>
-    <div class="mb-3">
-      <label for="age" class="form-label">Age</label>
-      <input type="text" title="age" class="form-control" id="age" formControlName="age" appNoAlphabetsDirective />
-      <div>
-        @if(patientAge?.touched && patientAge?.invalid) { @if(patientAge?.hasError('maxlength')) {
-        <div class="error">Maximum 3 characters</div>
+
+  <form [formGroup]="patientForm" (ngSubmit)="submit()" header>
+    <div class="input-container">
+      <div class="mb-3">
+        <label for="firstName" class="form-label">First Name</label>
+        <input type="text" title="firstName" class="form-control" id="firstName" formControlName="firstName"
+          appAlphabetsOnlyDirective />
+        @if(patientFirstName?.touched && patientFirstName?.invalid) {
+        @if(patientFirstName?.hasError('required')) {
+        <div class="error">First Name is required</div>
         } }
       </div>
-    </div>
-    <div class="mb-3">
-      <label for="gender" class="form-label">Gender</label>
-      <select class="form-select" name="gender" formControlName="gender" title="gender" required>
-        <option value="" disabled selected>Select Gender</option>
-        @for (option of genders; track option.value) {
-        <option [value]="option.value">{{ option.label }}</option>
-        }
-      </select>
-      @if(patientGender?.invalid && patientGender?.touched) {
-      <div class="text-danger">
-        @if(patientGender?.hasError('required')) {
-        <p class="error">Gender is required</p>
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input type="text" title="lastName" class="form-control" id="lastName" formControlName="lastName"
+          appAlphabetsOnlyDirective />
+        @if(patientLastName?.touched && patientLastName?.invalid) {
+        @if(patientLastName?.hasError('required')) {
+        <div class="error">Last Name is required</div>
+        } }
+      </div>
+      <div class="mb-3">
+        <label for="age" class="form-label">Age</label>
+        <input type="text" title="age" class="form-control" id="age" formControlName="age" appNoAlphabetsDirective />
+        <div>
+          @if(patientAge?.touched && patientAge?.invalid) { @if(patientAge?.hasError('maxlength')) {
+          <div class="error">Maximum 3 characters</div>
+          } }
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="gender" class="form-label">Gender</label>
+        <select class="form-select" name="gender" formControlName="gender" title="gender" required>
+          <option value="" disabled selected>Select Gender</option>
+          @for (option of genders; track option.value) {
+          <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+        @if(patientGender?.invalid && patientGender?.touched) {
+        <div class="text-danger">
+          @if(patientGender?.hasError('required')) {
+          <p class="error">Gender is required</p>
+          }
+        </div>
         }
       </div>
-      }
-    </div>
-    <div class="mb-3">
-      <label for="phone" class="form-label">Phone</label>
-      <input type="text" title="phone" class="form-control" id="gender" formControlName="phone"
-        appNoAlphabetsDirective />
-      <div></div>
-    </div>
-    <div class="mb-3">
-      <label for="bloodGroup" class="form-label">Blood Group</label>
-      <select class="form-select" name="bloodGroup" formControlName="bloodGroup" title="bloodGroup" required>
-        <option value="" disabled selected>Select Blood Group</option>
-        @for (option of bloodGroups; track option.value) {
-        <option [value]="option.value">{{ option.label }}</option>
-        }
-      </select>
-      @if(patientBloodGroup?.invalid && patientBloodGroup?.touched) {
-      <div class="text-danger">
-        @if(patientBloodGroup?.hasError('required')) {
-        <p class="error">Blood Group is required</p>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="text" title="phone" class="form-control" id="gender" formControlName="phone"
+          appNoAlphabetsDirective />
+        <div></div>
+      </div>
+      <div class="mb-3">
+        <label for="bloodGroup" class="form-label">Blood Group</label>
+        <select class="form-select" name="bloodGroup" formControlName="bloodGroup" title="bloodGroup" required>
+          <option value="" disabled selected>Select Blood Group</option>
+          @for (option of bloodGroups; track option.value) {
+          <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+        @if(patientBloodGroup?.invalid && patientBloodGroup?.touched) {
+        <div class="text-danger">
+          @if(patientBloodGroup?.hasError('required')) {
+          <p class="error">Blood Group is required</p>
+          }
+        </div>
         }
       </div>
-      }
     </div>
-  </div>
 
-  @if(mode === 'add') {
-  <div class="button-wrapper">
-    <button type="submit" class="btn btn-primary">
-      Add
-    </button>
-  </div>
-  } @else if(mode === 'edit') {
-  <div class="button-wrapper">
-    <div class="button-container">
-      <a class="cancel-link" (click)="onCancel()">
-        Cancel
-      </a>
-
+    @if(mode === 'add') {
+    <div class="button-wrapper">
       <button type="submit" class="btn btn-primary">
-        Update
+        Add
       </button>
     </div>
-  </div>
-  }
-</form>
+    } @else if(mode === 'edit') {
+    <div class="button-wrapper">
+      <div class="button-container">
+        <a class="cancel-link" (click)="onCancel()">
+          Cancel
+        </a>
 
-<app-page-table-title [childTableTitle]="pageTableTitle"></app-page-table-title>
+        <button type="submit" class="btn btn-primary">
+          Update
+        </button>
+      </div>
+    </div>
+    }
+  </form>
+</app-panel>
 
-@let patients = (patients$ | async);
+<app-panel>
+  <app-page-table-title [childTableTitle]="pageTableTitle" body></app-page-table-title>
 
-<app-data-table [columns]="patientTableColumns" [data]="patients || []" [mode]="mode" [pageTitle]="pageTitle"
-  (edit)="onEdit($event)" (delete)="onDelete($event)"></app-data-table>
+  @let patients = (patients$ | async);
+
+  <app-data-table [columns]="patientTableColumns" [data]="patients || []" [mode]="mode" [pageTitle]="pageTitle"
+    (edit)="onEdit($event)" (delete)="onDelete($event)" body></app-data-table>
+</app-panel>
 
 <!-- @if(patients?.length) {
 <table class=" table table-hover table-success table-bordered">

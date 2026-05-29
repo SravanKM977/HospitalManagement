@@ -1,7 +1,7 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { PatientService } from '../../services/patient.service';
-import { map, Observable } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 import { Patient } from '../../models/patients.interface';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormStyleDirective } from '../../../../shared/directives/form-style-directive';
@@ -11,10 +11,10 @@ import { NoAlphabetsDirective } from '../../../../shared/directives/no-alphabets
 import { AlphabetsOnlyDirective } from '../../../../shared/directives/alphabets-only-directive';
 import { Gender } from '../../../../shared/models/gender.interface';
 import { BloodGroup } from '../../../../shared/models/bloodGroup.interface';
-import { AllPhoneFormatsPipe } from '../../../../shared/pipes/all-phone-formats-pipe';
 import { PageTitle } from '../../../../shared/components/page-title/page-title';
 import { PageTableTitle } from '../../../../shared/components/page-table-title/page-table-title';
 import { DataTable } from '../../../../shared/components/data-table/data-table';
+import { Panel } from '../../../../shared/components/panel/panel';
 
 @Component({
   selector: 'app-patients',
@@ -27,10 +27,10 @@ import { DataTable } from '../../../../shared/components/data-table/data-table';
     TextHighlight,
     NoAlphabetsDirective,
     AlphabetsOnlyDirective,
-    AllPhoneFormatsPipe,
     PageTitle,
     PageTableTitle,
     DataTable,
+    Panel,
   ],
   providers: [PatientService],
   templateUrl: './patients.html',
@@ -83,7 +83,9 @@ export class Patients {
   }
 
   loadPatients() {
-    this.patients$ = this.patientService.getPatients().pipe(
+    this.patients$ = this.patientService.getPatients().pipe(shareReplay(1));
+    this.patients$.pipe(
+      shareReplay(1),
       map((patients) =>
         patients.map((patient) => ({
           ...patient,
