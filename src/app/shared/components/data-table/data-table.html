@@ -15,7 +15,7 @@
     <tr>
       @for(column of (columns|| bodyColumns); track column) {
       @if(column === "name") {
-      <td>{{item.fullName || item.name}}</td>
+      <td (click)="selectItem(item)" [style]="'cursor: pointer'">{{item.fullName || item.name}}</td>
       } @else if (column === "department") {
       <td>{{item.department?.name}}</td>
       } @else if (column === "phone") {

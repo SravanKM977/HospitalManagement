@@ -1,0 +1,14 @@
+@if(selectedPatient$ | async; as patient) {
+<div body>
+  <h1>Details:</h1>
+  <p>Name: {{ patient.fullName }}</p>
+
+  <p>Age: {{ patient.age }}</p>
+
+  <p>Gender: {{ patient.gender }}</p>
+
+  <p>Blood Group: {{ patient.bloodGroup }}</p>
+
+  <p>Phone: {{ patient.phone }}</p>
+</div>
+}

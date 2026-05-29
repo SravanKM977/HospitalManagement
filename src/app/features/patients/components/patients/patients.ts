@@ -1,7 +1,7 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { PatientService } from '../../services/patient.service';
-import { map, Observable, shareReplay } from 'rxjs';
+import { BehaviorSubject, map, Observable, shareReplay } from 'rxjs';
 import { Patient } from '../../models/patients.interface';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormStyleDirective } from '../../../../shared/directives/form-style-directive';
@@ -15,6 +15,8 @@ import { PageTitle } from '../../../../shared/components/page-title/page-title';
 import { PageTableTitle } from '../../../../shared/components/page-table-title/page-table-title';
 import { DataTable } from '../../../../shared/components/data-table/data-table';
 import { Panel } from '../../../../shared/components/panel/panel';
+import { PatientStateService } from '../../../../shared/state/services/patient-state.service';
+import { PatientDetails } from '../patient-details/patient-details';
 
 @Component({
   selector: 'app-patients',
@@ -31,6 +33,7 @@ import { Panel } from '../../../../shared/components/panel/panel';
     PageTableTitle,
     DataTable,
     Panel,
+    PatientDetails,
   ],
   providers: [PatientService],
   templateUrl: './patients.html',
@@ -63,7 +66,13 @@ export class Patients {
 
   patientTableColumns = ['name', 'age', 'gender', 'phone', 'bloodGroup'];
 
-  constructor(private patientService: PatientService, private fb: FormBuilder) {}
+  showPatientModal = false;
+
+  constructor(
+    private patientService: PatientService,
+    private fb: FormBuilder,
+    private patientStateService: PatientStateService
+  ) {}
 
   ngOnInit() {
     this.initializePatientForm();
@@ -143,6 +152,16 @@ export class Patients {
     } else {
       return;
     }
+  }
+
+  onSelectPatient(patient: Patient) {
+    this.patientStateService.selectedPatient$.next(patient);
+    this.showPatientModal = true;
+  }
+
+  closeModal() {
+    this.showPatientModal = false;
+    this.patientForm.reset();
   }
 
   submit() {

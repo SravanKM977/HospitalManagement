@@ -17,6 +17,7 @@ export class DataTable {
 
   edit = output<any>();
   delete = output<any>();
+  selectedItem = output<any>();
 
   onEdit(item: any) {
     this.edit.emit(item);
@@ -24,5 +25,9 @@ export class DataTable {
 
   onDelete(item: any) {
     this.delete.emit(item);
+  }
+
+  selectItem(item: any) {
+    this.selectedItem.emit(item);
   }
 }
