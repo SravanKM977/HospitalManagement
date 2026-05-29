@@ -99,8 +99,28 @@
   @let patients = (patients$ | async);
 
   <app-data-table [columns]="patientTableColumns" [data]="patients || []" [mode]="mode" [pageTitle]="pageTitle"
-    (edit)="onEdit($event)" (delete)="onDelete($event)" body></app-data-table>
+    (edit)="onEdit($event)" (delete)="onDelete($event)" (selectedItem)="onSelectPatient($event)" body></app-data-table>
 </app-panel>
+
+@if(showPatientModal) {
+
+<div class="modal-backdrop">
+
+  <div class="modal-container">
+
+    <button class="close-btn" (click)="closeModal()">
+      X
+    </button>
+
+    <app-panel>
+      <app-patient-details body></app-patient-details>
+    </app-panel>
+
+  </div>
+
+</div>
+
+}
 
 <!-- @if(patients?.length) {
 <table class=" table table-hover table-success table-bordered">
