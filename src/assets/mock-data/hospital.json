@@ -93,19 +93,21 @@
   ],
   "doctors": [
     {
-      "id": "1",
+      "id": "fNUpD_R700k",
       "name": "Sravan",
-      "specialization": "ded",
+      "specialization": "Brain",
       "experience": 2,
-      "departmentId": "3"
+      "departmentId": "2"
     }
   ],
   "appointments": [
     {
-      "id": "1",
-      "patientId": 1,
-      "doctorId": 1,
-      "appointmentDate": "2026-05-25"
+      "id": "-qf_4Q57QAg",
+      "patientId": "4",
+      "doctorId": "fNUpD_R700k",
+      "appointmentDate": "2026-05-25",
+      "reason": "scheduled",
+      "status": "SCHEDULED"
     }
   ],
   "departments": [

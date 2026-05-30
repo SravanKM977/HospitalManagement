@@ -2,8 +2,8 @@
 <table class="table table-hover table-success table-bordered">
   <thead class="table-light">
     <tr>
-      @for(column of columns; track column) {
-      <th scope="col">{{column | titlecase}}</th>
+      @for(column of columns; track column.field) {
+      <th scope="col">{{column.header | titlecase}}</th>
       }
       @if(mode === 'add') {
       <th scope="col">Action</th>
@@ -13,15 +13,23 @@
   <tbody class="table-group-divider">
     @for(item of data; track item) {
     <tr>
-      @for(column of (columns|| bodyColumns); track column) {
-      @if(column === "name") {
-      <td (click)="selectItem(item)" [style]="'cursor: pointer'">{{item.fullName || item.name}}</td>
-      } @else if (column === "department") {
+      @for(column of columns; track column.field) {
+      @if(column.field === "fullName" || column.field === "name") {
+      <td (click)="selectItem(item)" [style]="'cursor: pointer'">
+        {{item.name || item.fullName}}
+      </td>
+      } @else if (column.field === "department") {
       <td>{{item.department?.name}}</td>
-      } @else if (column === "phone") {
-      <td scope="row">{{ item[column] | allPhoneFormats}}</td>
-      } @else if (column !== "name") {
-      <td scope="row">{{ item[column] }}</td>
+      } @else if (column.field === "phone") {
+      <td scope="row">{{ item[column.field] | allPhoneFormats}}</td>
+      }
+      <!-- @else if (column.field === "gender") {
+      <td scope="row">{{ item[column.field] | genderFormat}}</td>
+      } -->
+      @else if (column.field !== "name") {
+      <td scope="row">
+        {{ (item[column.field] | genderFormat) || (item[column.field] | fullName) || (item[column.field] |
+        statusLabel)}}</td>
       }
       }
       @if(mode === 'add') {
