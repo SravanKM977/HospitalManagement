@@ -1,18 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, output, Output } from '@angular/core';
 import { AllPhoneFormatsPipe } from '../../pipes/all-phone-formats-pipe';
+import { TableColumn } from '../../models/data-table.interface';
+import { FullNamePipe } from '../../pipes/full-name-pipe';
+import { GenderFormatPipe } from '../../pipes/gender-format-pipe';
+import { StatusLabelPipe } from '../../pipes/status-label-pipe';
 
 @Component({
   selector: 'app-data-table',
-  imports: [CommonModule, AllPhoneFormatsPipe],
+  imports: [CommonModule, AllPhoneFormatsPipe, GenderFormatPipe, FullNamePipe, StatusLabelPipe],
   templateUrl: './data-table.html',
   styleUrl: './data-table.css',
 })
 export class DataTable {
-  @Input() columns: string[] = [];
+  @Input() columns: TableColumn[] = [];
   @Input() data: any[] = [];
-  @Input() mode = '';
-  @Input() pageTitle = '';
+  @Input() mode: string = '';
+  @Input() pageTitle: string = '';
   @Input() bodyColumns: string[] = [];
 
   edit = output<any>();

@@ -5,7 +5,7 @@
 
     @let patients = (patients$ | async);
     <div class="mb-3">
-      <label for="patientId" class="form-label">Patient Id</label>
+      <label for="patientId" class="form-label">Patient</label>
       <select type="text" name="patientId" title="patientId" class="form-select" formControlName="patientId">
         <option [ngValue]="null" disabled selected>
           Select Patient
@@ -18,7 +18,7 @@
 
     @let doctors = (doctors$ | async);
     <div class="mb-3">
-      <label for="doctorId" class="form-label"> Doctor Id</label>
+      <label for="doctorId" class="form-label"> Doctor</label>
       <select type="select" name="doctorId" title="doctorId" class="form-select" formControlName="doctorId">
         <option [ngValue]="null" disabled selected>
           Select Doctor
@@ -85,6 +85,7 @@
       <th scope="col">Patient</th>
       <th scope="col">Doctor</th>
       <th scope="col">Department</th>
+      <th scope="col">Status</th>
       <th scope="col">Date</th>
       @if(mode === 'add') {
       <th scope="col">Action</th>
@@ -98,6 +99,7 @@
       <td scope="row">{{appointment.patient?.fullName}}</td>
       <td scope="row">{{appointment.doctor?.name}}</td>
       <td scope="row">{{appointment.doctor?.department?.name}}</td>
+      <td scope="row">{{appointment.status | statusLabel}}</td>
       <td scope="row">{{appointment.appointmentDate}}</td>
       @if(mode === 'add') {
       <td scope="row">

@@ -64,7 +64,13 @@ export class Patients {
     { value: 'O-', label: 'O-' },
   ];
 
-  patientTableColumns = ['name', 'age', 'gender', 'phone', 'bloodGroup'];
+  patientTableColumns = [
+    { header: 'Name', field: 'fullName' },
+    { header: 'Age', field: 'age' },
+    { header: 'Gender', field: 'gender' },
+    { header: 'Phone', field: 'phone' },
+    { header: 'Blood Group', field: 'bloodGroup' },
+  ];
 
   showPatientModal = false;
 
@@ -94,7 +100,6 @@ export class Patients {
   loadPatients() {
     this.patients$ = this.patientService.getPatients().pipe(shareReplay(1));
     this.patients$.pipe(
-      shareReplay(1),
       map((patients) =>
         patients.map((patient) => ({
           ...patient,

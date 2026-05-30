@@ -37,8 +37,12 @@ export class Doctors {
   departments$!: Observable<Department[]>;
   departments: Department[] = [];
 
-  doctorTableHeaderColumns = ['name', 'specialization', 'experience', 'department'];
-  doctorTableBodyColumns = ['name', 'specialization', 'experience', 'department'];
+  doctorTableColumns = [
+    { header: 'Name', field: 'name' },
+    { header: 'Specialization', field: 'specialization' },
+    { header: 'Experience', field: 'experience' },
+    { header: 'Department', field: 'department' },
+  ];
 
   constructor(
     private fb: FormBuilder,

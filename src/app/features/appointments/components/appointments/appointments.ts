@@ -5,7 +5,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { AppointmentService } from '../../services/appointment-service';
 import { Appointment } from '../../models/appointments.interface';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, shareReplay } from 'rxjs';
 import { Doctor } from '../../../doctors/models/doctors.interface';
 import { Patient } from '../../../patients/models/patients.interface';
 import { Department } from '../../../departments/models/departments.interface';
@@ -14,6 +14,7 @@ import { DoctorService } from '../../../doctors/services/doctor-service';
 import { DepartmentService } from '../../../departments/services/department-service';
 import { FormInputFontDirective } from '../../../../shared/directives/form-input-font-directive';
 import { FormStyleDirective } from '../../../../shared/directives/form-style-directive';
+import { StatusLabelPipe } from '../../../../shared/pipes/status-label-pipe';
 
 @Component({
   selector: 'app-appointments',
@@ -25,6 +26,7 @@ import { FormStyleDirective } from '../../../../shared/directives/form-style-dir
     AsyncPipe,
     FormInputFontDirective,
     FormStyleDirective,
+    StatusLabelPipe,
   ],
   providers: [AppointmentService, PatientService, DoctorService, DepartmentService],
   templateUrl: './appointments.html',
@@ -42,7 +44,7 @@ export class Appointments {
   departments$!: Observable<Department[]>;
 
   mappedAppointments$!: Observable<Appointment[]>;
-  statuses = ['Scheduled', 'Completed', 'Cancelled'];
+  statuses = ['SCHEDULED', 'COMPLETED', 'CANCELLED'];
 
   errorMessage = '';
 
@@ -71,10 +73,10 @@ export class Appointments {
   }
 
   callAppointments() {
-    this.appointments$ = this.appointmentService.getAppointments();
-    this.patients$ = this.patientService.getPatients();
-    this.doctors$ = this.doctorService.getDoctors();
-    this.departments$ = this.departmentService.getDepartments();
+    this.appointments$ = this.appointmentService.getAppointments().pipe(shareReplay(1));
+    this.patients$ = this.patientService.getPatients().pipe(shareReplay(1));
+    this.doctors$ = this.doctorService.getDoctors().pipe(shareReplay(1));
+    this.departments$ = this.departmentService.getDepartments().pipe(shareReplay(1));
 
     this.mappedAppointments$ = combineLatest([
       this.appointments$,
@@ -148,7 +150,7 @@ export class Appointments {
     this.appointmentService.addAppointments(newAppointment).subscribe(
       (response) => {
         this.appointmentForm.reset({
-          status: 'Scheduled',
+          status: 'SCHEDULED',
         });
       },
       (error) => {
@@ -163,7 +165,7 @@ export class Appointments {
       (response) => {
         if (response) {
           this.callAppointments();
-          this.appointmentForm.reset({ status: 'Scheduled' });
+          this.appointmentForm.reset({ status: 'SCHEDULED' });
           this.mode = 'add';
         }
       },
