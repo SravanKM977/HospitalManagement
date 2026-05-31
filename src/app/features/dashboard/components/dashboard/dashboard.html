@@ -1,39 +1,48 @@
 <div class="dashboard-cards">
-
+  @let patients = (patients$ | async);
   <app-card>
 
     <h2>Total Patients</h2>
 
-    <p>120</p>
+    <p>{{patients?.length}}</p>
 
   </app-card>
 
+  @let doctors = (doctors$ | async);
   <app-card>
 
     <h2>Total Doctors</h2>
 
-    <p>25</p>
+    <p>{{doctors?.length}}</p>
 
   </app-card>
 
+  @let appointments = (appointments$ | async);
   <app-card>
 
-    <h3>Appointment</h3>
+    <h3>Total Appointments</h3>
 
-    <p>Dr Smith</p>
-
-    <p>25 May 2026</p>
+    <p>{{appointments?.length}}</p>
 
   </app-card>
 
-  <app-card>
+</div>
 
-    <img src="assets/images/doctors.png" alt="" />
+<div class="charts-container">
 
-    <h3>John Doe</h3>
+  <div class="chart-card">
+    <h3>Patients by Department</h3>
+    <canvas #patientsChart></canvas>
+  </div>
 
-    <button>Edit</button>
+  <div class="chart-card">
+    <h3>Appointment Status</h3>
+    <canvas #appointmentChart></canvas>
+  </div>
 
-  </app-card>
+  <div class="chart-card">
+    <h3>Billing Analytics</h3>
+    <canvas #billingChart></canvas>
+  </div>
 
 </div>
