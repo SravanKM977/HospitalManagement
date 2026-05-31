@@ -15,6 +15,7 @@ import { DepartmentService } from '../../../departments/services/department-serv
 import { FormInputFontDirective } from '../../../../shared/directives/form-input-font-directive';
 import { FormStyleDirective } from '../../../../shared/directives/form-style-directive';
 import { StatusLabelPipe } from '../../../../shared/pipes/status-label-pipe';
+import { StatusColorPipe } from '../../../../shared/pipes/status-color-pipe';
 
 @Component({
   selector: 'app-appointments',
@@ -27,6 +28,7 @@ import { StatusLabelPipe } from '../../../../shared/pipes/status-label-pipe';
     FormInputFontDirective,
     FormStyleDirective,
     StatusLabelPipe,
+    StatusColorPipe,
   ],
   providers: [AppointmentService, PatientService, DoctorService, DepartmentService],
   templateUrl: './appointments.html',

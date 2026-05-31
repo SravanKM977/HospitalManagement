@@ -5,10 +5,22 @@ import { TableColumn } from '../../models/data-table.interface';
 import { FullNamePipe } from '../../pipes/full-name-pipe';
 import { GenderFormatPipe } from '../../pipes/gender-format-pipe';
 import { StatusLabelPipe } from '../../pipes/status-label-pipe';
+import { TextHighlight } from '../../directives/text-highlight.directive';
+import { StatusColorPipe } from '../../pipes/status-color-pipe';
+import { DoctorTypeDirective } from '../../directives/doctor-type-directive';
 
 @Component({
   selector: 'app-data-table',
-  imports: [CommonModule, AllPhoneFormatsPipe, GenderFormatPipe, FullNamePipe, StatusLabelPipe],
+  imports: [
+    CommonModule,
+    AllPhoneFormatsPipe,
+    GenderFormatPipe,
+    FullNamePipe,
+    StatusLabelPipe,
+    TextHighlight,
+    StatusColorPipe,
+    DoctorTypeDirective,
+  ],
   templateUrl: './data-table.html',
   styleUrl: './data-table.css',
 })

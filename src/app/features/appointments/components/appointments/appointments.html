@@ -99,7 +99,7 @@
       <td scope="row">{{appointment.patient?.fullName}}</td>
       <td scope="row">{{appointment.doctor?.name}}</td>
       <td scope="row">{{appointment.doctor?.department?.name}}</td>
-      <td scope="row">{{appointment.status | statusLabel}}</td>
+      <td scope="row" [class]="appointment.status | statusColor">{{appointment.status | statusLabel}}</td>
       <td scope="row">{{appointment.appointmentDate}}</td>
       @if(mode === 'add') {
       <td scope="row">
