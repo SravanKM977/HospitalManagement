@@ -22,14 +22,14 @@
       <td>{{item.department?.name}}</td>
       } @else if (column.field === "phone") {
       <td scope="row">{{ item[column.field] | allPhoneFormats}}</td>
-      }
-      <!-- @else if (column.field === "gender") {
+      } @else if (column.field === "gender") {
       <td scope="row">{{ item[column.field] | genderFormat}}</td>
-      } -->
-      @else if (column.field !== "name") {
-      <td scope="row">
-        {{ (item[column.field] | genderFormat) || (item[column.field] | fullName) || (item[column.field] |
-        statusLabel)}}</td>
+      } @else if (column.field === "status") {
+      <td scope="row" [class]="item[column.field] | statusColor">{{(item[column.field] | statusLabel)}}</td>
+      } @else if(column.field === "specialization") {
+      <td scope="row" [appDoctorType]="item.specialization">{{ item[column.field]}}</td>
+      } @else {
+      <td scope="row">{{ item[column.field]}}</td>
       }
       }
       @if(mode === 'add') {

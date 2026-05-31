@@ -2,7 +2,7 @@ import { Directive, ElementRef, Host, HostBinding, HostListener, Input } from '@
 
 // directive with selector that targets elements with class 'form-control', 'label', or 'label' with the 'appTextHighlight' attribute
 @Directive({
-  selector: 'button, label[appTextHighlight]',
+  selector: 'button, label[appTextHighlight], th',
   standalone: true,
 })
 export class TextHighlight {
